@@ -9,8 +9,7 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 parameters:
-  numberOfReplicas: "5"                  # adjust to your node count
+  numberOfReplicas: "5
   dataLocality: "best-effort"
   unmapMarkSnapChainRemoved: "true"
-  # This is the key: only schedule on disks tagged 'longhorn-extra'
   diskSelector: "longhorn-extra"
