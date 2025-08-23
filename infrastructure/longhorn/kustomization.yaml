@@ -5,9 +5,4 @@ resources:
   - ../longhorn/helm-repo.yaml
   - ../longhorn/helmrelease.yaml
   - ../longhorn/storageclasses/longhorn-extra.yaml
-patches:
-  - path: ../longhorn/patches/unset-default-local-path.yaml
-    target:
-      kind: StorageClass
-      name: local-path
-
+  - ../longhorn/patches/unset-default-local-path.yaml
