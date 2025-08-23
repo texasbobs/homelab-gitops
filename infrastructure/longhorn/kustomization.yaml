@@ -5,3 +5,4 @@ resources:
   - ./helmrelease.yaml
   - ./storageclasses/longhorn-extra.yaml
   - ./namespace.yaml
+  - ./ingress.yaml
