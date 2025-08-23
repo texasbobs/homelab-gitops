@@ -4,7 +4,7 @@ metadata:
   name: longhorn
   namespace: longhorn-system
 spec:
-  interval: 15m
+  interval: 30m
   chart:
     spec:
       chart: longhorn
@@ -14,11 +14,17 @@ spec:
         name: longhorn
         namespace: flux-system
   install:
+    createNamespace: true
     crds: Create
   upgrade:
     crds: CreateReplace
   values:
+    # Prevent Longhorn from auto-creating /var/lib/longhorn disks everywhere.
     defaultSettings:
+      createDefaultDiskLabeledNodes: true
       defaultReplicaCount: 3
+      # You won't label nodes, so the default /var/lib/longhorn disk won't be created.
+    # Also don't create Longhorn's built-in default StorageClass;
+    # we'll supply our own with a diskSelector.
     persistence:
       defaultClass: false
