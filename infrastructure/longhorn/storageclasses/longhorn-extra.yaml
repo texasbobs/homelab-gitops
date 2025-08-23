@@ -9,7 +9,7 @@ allowVolumeExpansion: true
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
 parameters:
-  numberOfReplicas: "5
+  numberOfReplicas: "5"
   dataLocality: "best-effort"
   unmapMarkSnapChainRemoved: "true"
   diskSelector: "longhorn-extra"
