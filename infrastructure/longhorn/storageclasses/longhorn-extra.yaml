@@ -11,5 +11,5 @@ volumeBindingMode: Immediate
 parameters:
   numberOfReplicas: "5"
   dataLocality: "best-effort"
-  unmapMarkSnapChainRemoved: "true"
+  unmapMarkSnapChainRemoved: "enabled"
   diskSelector: "longhorn-extra"
