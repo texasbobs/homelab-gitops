@@ -5,6 +5,8 @@ metadata:
   namespace: longhorn-system
 spec:
   interval: 10m
+  driftDetection:
+    mode: enabled
   chart:
     spec:
       chart: longhorn
@@ -17,7 +19,10 @@ spec:
     createNamespace: true
     crds: Create
   upgrade:
+    remediation:
+      retries: 3
     crds: CreateReplace
+    force: true
   values:
     # Prevent Longhorn from auto-creating /var/lib/longhorn disks everywhere.
     defaultSettings:
