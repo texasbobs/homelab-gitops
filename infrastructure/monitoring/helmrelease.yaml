@@ -24,7 +24,7 @@ spec:
         storageSpec:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn-extra
+              storageClassName: longhorn
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
@@ -34,7 +34,7 @@ spec:
         storage:
           volumeClaimTemplate:
             spec:
-              storageClassName: longhorn-extra
+              storageClassName: longhorn
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
