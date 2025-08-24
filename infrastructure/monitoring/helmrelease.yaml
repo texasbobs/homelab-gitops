@@ -24,11 +24,19 @@ spec:
     force: true
   values:
     prometheus:
+      service:
+        type: LoadBalancer
+        port: 9090
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - prometheus.bobshomelab.org
+        path: /
+        pathType: Prefix
+        tls: []
       prometheusSpec:
         retention: 15d
-        service:
-          type: LoadBalancer
-          port: 9090
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -41,11 +49,27 @@ spec:
       service:
         type: LoadBalancer
         port: 3000
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - grafana.bobshomelab.org
+        path: /
+        pathType: Prefix
+        tls: []
     alertmanager:
+      service:
+        type: LoadBalancer
+        port: 9080
+      ingress:
+        enabled: true
+        ingressClassName: traefik
+        hosts:
+          - alertmanager.bobshomelab.org
+        path: /
+        pathType: Prefix
+        tls: []
       alertmanagerSpec:
-        service:
-          type: LoadBalancer
-          port: 9080
         storage:
           volumeClaimTemplate:
             spec:
