@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: kube-prometheus-stack
-      version: 65.5.0
+      version: 77.0.0
       sourceRef:
         kind: HelmRepository
         name: prometheus-community
@@ -26,6 +26,9 @@ spec:
     prometheus:
       prometheusSpec:
         retention: 15d
+        service:
+          type: LoadBalancer
+          port: 9090
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -34,8 +37,15 @@ spec:
               resources:
                 requests:
                   storage: 20Gi
+    grafana:
+      service:
+        type: LoadBalancer
+        port: 3000
     alertmanager:
       alertmanagerSpec:
+        service:
+          type: LoadBalancer
+          port: 9080
         storage:
           volumeClaimTemplate:
             spec:
