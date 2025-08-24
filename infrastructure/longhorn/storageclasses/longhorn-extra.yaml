@@ -1,15 +1,30 @@
+# longhorn (default): sane, fast, resilient
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: longhorn
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: driver.longhorn.io
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  dataEngine: "v1"
+  numberOfReplicas: "3"
+  dataLocality: "best-effort"
+  fsType: "ext4"
+---
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: longhorn-extra
-  annotations:
-    storageclass.kubernetes.io/is-default-class: "true"   # make this the cluster default
 provisioner: driver.longhorn.io
 allowVolumeExpansion: true
 reclaimPolicy: Delete
-volumeBindingMode: Immediate
+volumeBindingMode: WaitForFirstConsumer
 parameters:
+  dataEngine: "v1"
   numberOfReplicas: "5"
   dataLocality: "best-effort"
-  unmapMarkSnapChainRemoved: "enabled"
-  diskSelector: "longhorn-extra"
+  fsType: "ext4"
