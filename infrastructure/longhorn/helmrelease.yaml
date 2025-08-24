@@ -27,3 +27,8 @@ spec:
       defaultReplicaCount: 3
     persistence:
       defaultClass: false
+      volumeBindingMode: WaitForFirstConsumer
+      defaultClassReplicaCount: "3"
+      defaultDataLocality: best-effort
+      defaultFsType: ext4
+      dataEngine: v1
