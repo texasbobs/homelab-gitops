@@ -32,6 +32,7 @@ spec:
       defaultDataLocality: best-effort
       defaultFsType: ext4
       dataEngine: v1
+      backupTargetName: ""
     preUpgradeChecker:
       jobEnabled: false          # disable the pre-upgrade hook in GitOps
       upgradeVersionCheck: false # (optional) skip manager-side version gate
