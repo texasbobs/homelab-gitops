@@ -10,5 +10,5 @@ volumeBindingMode: WaitForFirstConsumer
 parameters:
   dataEngine: "v1"
   numberOfReplicas: "5"
-  dataLocality: "best-effort"
+  dataLocality: "disabled"
   fsType: "ext4"
