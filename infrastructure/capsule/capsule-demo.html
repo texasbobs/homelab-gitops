@@ -1,0 +1,69 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: capsule
+  namespace: flux-system
+spec:
+  serviceAccountName: kustomize-controller
+  targetNamespace: "capsule-system"
+  interval: 10m
+  releaseName: "capsule"
+  chart:
+    spec:
+      chart: capsule
+      version: "0.10.6"
+      sourceRef:
+        kind: HelmRepository
+        name: capsule
+      interval: 24h
+  install:
+    createNamespace: true
+  upgrade:
+    remediation:
+      remediateLastFailure: true
+  driftDetection:
+    mode: enabled
+  values:
+    crds:
+      install: true
+    certManager:
+      generateCertificates: true
+    tls:
+      enableController: false
+      create: false
+    manager: 
+      options:  
+        capsuleConfiguration: default
+        ignoreUserGroups:
+          - oidc:administators
+        capsuleUserGroups:
+          - oidc:kubernetes-users
+          - system:serviceaccounts:capsule-argo-addon
+    webhooks:
+      hooks:
+        nodes: 
+          failurePolicy: Ignore
+    serviceMonitor:
+      enabled: true
+    proxy:
+      enabled: true
+      webhooks:
+        enabled: true
+      certManager:
+        generateCertificates: true
+      options:
+        generateCertificates: false
+        oidcUsernameClaim: "email"
+        extraArgs:
+        - "--feature-gates=ProxyClusterScoped=true"
+        - "--feature-gates=ProxyAllNamespaced=true"
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: capsule
+  namespace: flux-system
+spec:
+  type: "oci"
+  interval: 12h0m0s
+  url: oci://ghcr.io/projectcapsule/charts
