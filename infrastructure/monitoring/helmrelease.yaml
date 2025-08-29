@@ -17,10 +17,14 @@ spec:
         namespace: flux-system
   install:
     crds: Create
+    timeout: 30m
+    remediation:
+      retries: 5            # or -1 to retry forever
   upgrade:
     remediation:
-      retries: 3
+      retries: 5
     crds: CreateReplace
+      timeout: 30m
 #    force: true
   values:
     prometheus:
