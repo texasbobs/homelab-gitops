@@ -24,7 +24,7 @@ spec:
     remediation:
       retries: 5
     crds: CreateReplace
-      timeout: 30m
+    timeout: 30m
 #    force: true
   values:
     prometheus:
